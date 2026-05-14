@@ -116,14 +116,24 @@
     }
     
     #tooltip .version {
-      color: #94a3b8;
+      color: #4ade80;
       font-size: 12px;
       margin-bottom: 8px;
+      font-weight: 600;
+    }
+    
+    #tooltip .label {
+      color: #64748b;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     
     #tooltip .description {
-      font-size: 14px;
+      font-size: 13px;
       margin-bottom: 8px;
+      color: #cbd5e1;
+      line-height: 1.4;
     }
     
     #tooltip .tags {
@@ -237,8 +247,8 @@
     
     <div id="tooltip">
       <h3 id="tooltip-name"></h3>
-      <div class="version" id="tooltip-version"></div>
-      <div class="description" id="tooltip-desc"></div>
+      <div><span class="label">Version:</span> <span id="tooltip-version" class="version"></span></div>
+      <div><span class="label">Description:</span> <span id="tooltip-desc" class="description"></span></div>
       <div class="tags" id="tooltip-tags"></div>
       <div class="deps" id="tooltip-deps"></div>
     </div>
