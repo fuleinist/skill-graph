@@ -1,0 +1,20 @@
+{
+  "name": "skill-graph",
+  "version": "1.0.0",
+  "description": "Visual dependency graph for AI agent skills",
+  "main": "src/cli.js",
+  "bin": {
+    "skill-graph": "src/cli.js"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "cli": "node src/cli.js"
+  },
+  "keywords": ["ai", "agents", "skills", "dependencies", "visualization"],
+  "license": "MIT",
+  "dependencies": {
+    "d3": "^7.8.5",
+    "commander": "^11.1.0"
+  },
+  "devDependencies": {}
+}

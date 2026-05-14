@@ -1,0 +1,81 @@
+{
+  "skills": [
+    {
+      "name": "skill-graph",
+      "version": "1.0.0",
+      "description": "Visual dependency graph for AI agent skills",
+      "tags": ["visualization", "tools"],
+      "dependencies": {
+        "d3": "^7.0.0",
+        "commander": "^11.0.0"
+      },
+      "conflicts": {}
+    },
+    {
+      "name": "agent-skills-registry",
+      "version": "1.0.0",
+      "description": "GitHub registry for AI agent skills with version pinning",
+      "tags": ["registry", "tools"],
+      "dependencies": {
+        "commander": "^11.0.0"
+      },
+      "conflicts": {}
+    },
+    {
+      "name": "context-budget",
+      "version": "1.0.0",
+      "description": "Token budgeting dashboard and predictor for AI coding agents",
+      "tags": ["monitoring", "tools"],
+      "dependencies": {},
+      "conflicts": {}
+    },
+    {
+      "name": "local-rag-bridge",
+      "version": "1.0.0",
+      "description": "API layer connecting local LLMs to existing RAG pipelines",
+      "tags": ["api", "backend"],
+      "dependencies": {
+        "fastapi": "^0.100.0"
+      },
+      "conflicts": {}
+    },
+    {
+      "name": "prompt-lens",
+      "version": "1.0.0",
+      "description": "CLI tool that visualizes prompt structure and optimizes tokens",
+      "tags": ["cli", "tools"],
+      "dependencies": {},
+      "conflicts": {}
+    },
+    {
+      "name": "stealth-fetch",
+      "version": "1.0.0",
+      "description": "Rust library for anti-detection HTTP fetching",
+      "tags": ["scraping", "utilities"],
+      "dependencies": {
+        "reqwest": "^0.11.0"
+      },
+      "conflicts": {
+        "context-budget": "^1.0.0"
+      }
+    },
+    {
+      "name": "skill-merge",
+      "version": "1.0.0",
+      "description": "Merge tool for combining multiple agent skill sets",
+      "tags": ["merge", "tools"],
+      "dependencies": {
+        "commander": "^11.0.0"
+      },
+      "conflicts": {}
+    },
+    {
+      "name": "agent-diff",
+      "version": "1.0.0",
+      "description": "Diff tool for AI agent context snapshots",
+      "tags": ["debugging", "tools"],
+      "dependencies": {},
+      "conflicts": {}
+    }
+  ]
+}
