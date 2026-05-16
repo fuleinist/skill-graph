@@ -13,13 +13,31 @@ program
   .command('parse')
   .description('Parse and validate a skill manifest file')
   .argument('<file>', 'Path to skills.json manifest')
-  .action((file) => {
+  .option('-s, --since <date>', 'Show skills modified after YYYY-MM-DD')
+  .action((file, opts) => {
     try {
       const content = fs.readFileSync(file, 'utf8');
       const manifest = JSON.parse(content);
+      const sinceDate = opts.since ? new Date(opts.since) : null;
+      
+      if (sinceDate && isNaN(sinceDate.getTime())) {
+        console.error('✗ Error: Invalid date format. Use YYYY-MM-DD');
+        process.exit(1);
+      }
+      
+      const stats = fs.statSync(file);
+      if (sinceDate && stats.mtime < sinceDate) {
+        console.log(`⚠ File last modified: ${stats.mtime.toISOString().split('T')[0]}`);
+        console.log(`  No skills modified after ${opts.since}`);
+        return;
+      }
       
       console.log('✓ Valid JSON');
       console.log(`  Skills: ${manifest.skills?.length || 0}`);
+      
+      if (sinceDate) {
+        console.log(`  Filtered since: ${opts.since}`);
+      }
       
       if (manifest.skills) {
         manifest.skills.forEach(skill => {
@@ -56,10 +74,25 @@ program
   .command('check')
   .description('Check for version conflicts in a skill manifest')
   .argument('<file>', 'Path to skills.json manifest')
-  .action((file) => {
+  .option('-s, --since <date>', 'Check skills modified after YYYY-MM-DD')
+  .action((file, opts) => {
     try {
       const content = fs.readFileSync(file, 'utf8');
       const manifest = JSON.parse(content);
+      const sinceDate = opts.since ? new Date(opts.since) : null;
+      
+      if (sinceDate && isNaN(sinceDate.getTime())) {
+        console.error('✗ Error: Invalid date format. Use YYYY-MM-DD');
+        process.exit(1);
+      }
+      
+      const stats = fs.statSync(file);
+      if (sinceDate && stats.mtime < sinceDate) {
+        console.log(`⚠ File last modified: ${stats.mtime.toISOString().split('T')[0]}`);
+        console.log(`  No recently-modified skills to check`);
+        return;
+      }
+      
       const conflicts = findConflicts(manifest.skills || []);
       
       if (conflicts.length === 0) {
