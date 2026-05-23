@@ -133,7 +133,17 @@ program
     const server = http.createServer((req, res) => {
       const parsedUrl = url.parse(req.url);
       let filePath = parsedUrl.pathname === '/' ? '/index.html' : parsedUrl.pathname;
+      // Sanitize path to prevent directory traversal
+      filePath = path.normalize(filePath).replace(/^(\.\.[\/\\])+/, '');
+      if (!filePath) filePath = 'index.html';
       filePath = path.join(__dirname, '..', filePath);
+      // Ensure resolved path is within the project directory
+      const projectRoot = path.join(__dirname, '..');
+      if (!filePath.startsWith(projectRoot)) {
+        res.writeHead(403);
+        res.end('Forbidden');
+        return;
+      }
       
       const ext = path.extname(filePath);
       const contentType = mimeTypes[ext] || 'text/plain';
